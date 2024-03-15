@@ -16,7 +16,8 @@ async def on_ready():
 
 @bot.command()
 async def hello(ctx):
-    await ctx.send(f'Hi! I am a bot {bot.user}!')
+    author_name = ctx.message.author.name
+    await ctx.send(f'Hi{author_name}! I am a bot {bot.user}!')
 
 @bot.command()
 async def passwd(ctx):
@@ -31,15 +32,15 @@ async def heh(ctx, count_heh = 5):
     await ctx.send("he" * count_heh)
 
 @bot.command()
-async def roll(ctx, dice: str):
-    """Rolls a dice in NdN format."""
-    try:
-        rolls, limit = map(int, dice.split('d'))
-    except Exception:
-        await ctx.send('Format has to be in NdN!')
-        return
+async def math(ctx, a : int , b : int):
+    result1 = a + b
+    result2 = a - b
+    result3 = a * b
+    result4 = a / b
+    await ctx.send(f'{a} + {b} = {result1}')
+    await ctx.send(f'{a} - {b} = {result2}')
+    await ctx.send(f'{a} * {b} = {result3}')
+    await ctx.send(f'{a} / {b} = {result4}')
 
-    result = ', '.join(str(random.randint(1, limit)) for r in range(rolls))
-    await ctx.send(result)
 bot.run(token)
 
