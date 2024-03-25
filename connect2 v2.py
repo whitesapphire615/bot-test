@@ -1,4 +1,6 @@
 import discord
+import os
+import requests
 from discord.ext import commands
 from bot_logic import * 
 
@@ -42,5 +44,39 @@ async def math(ctx, a : int , b : int):
     await ctx.send(f'{a} * {b} = {result3}')
     await ctx.send(f'{a} / {b} = {result4}')
 
+@bot.command()
+async def mem(ctx):
+    image_file = random.choice(os.listdir('images'))
+
+    with open(f'images/{image_file}', 'rb') as f:
+        picture = discord.File(f)
+    await ctx.send(file=picture)
+
+def get_duck_image_url():    
+    url = 'https://random-d.uk/api/random'
+    res = requests.get(url)
+    data = res.json()
+    return data['url']
+
+@bot.command('duck')
+async def duck(ctx):
+    image_url = get_duck_image_url()
+    await ctx.send(image_url)
+
+
+def get_pokemon_image_url():    
+    url = 'https://pokeapi.co'
+    res = requests.get(url)
+    data = res.json()
+    return data['url']
+
+
+@bot.command('pokemon')
+async def pokemon(ctx):
+    image_url = get_pokemon_image_url()
+    await ctx.send(image_url)
+
+
 bot.run(token)
+
 
