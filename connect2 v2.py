@@ -76,6 +76,21 @@ async def pokemon(ctx):
     image_url = get_pokemon_image_url()
     await ctx.send(image_url)
 
+daur_ulang = {
+    'kardus': 'dapat dijadikan sebagai bahan pembuat kerajinan yang banyak hasil nya seperti bangunan dari kardus.',
+    'kertas': '\n1.Dapat menjadi hiasan buku.\n2.dapat menjadi hiasan dinding dan kertas dapat mudah dibentuk seperti origami',
+    'kaca': 'Kaca dapat dijadikan sebagai hiasan kaca vas bunga atau toples bahkan lampu hias.',
+    'botol': '\n1.Dapat dijadikan untuk tempat wadah pena atau pensil.\n2.Bisa menjadi hiasan taman seperti pot bunga.\n3.kerajinan dengan botol ada banyak bahkan dapat dijadikan seperti mainan.',
+}
+
+@bot.command("daur_ulang_sampah")
+async def saran_daur_ulang(ctx, item: str):
+    
+    # Jika item ada dalam daftar daur_ulang, beri saran untuk mendaur ulang
+    if item.lower() in daur_ulang:
+        await ctx.send(f"Rekomendasi untuk mengolah {item.capitalize()}: {daur_ulang[item.lower()]}")
+    else:
+        await ctx.send(f"Maaf, resep untuk mengolah {item.capitalize()} tidak ditemukan.")
 
 bot.run(token)
 
